@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-14T01:39:59+05:30
+
+====== 2. What is a linked list ======
+Created Tuesday 14 January 2020
+
+* Arrays cannot be extended(**Dynamic Arrays can be though**), hence we need a list which can be extended or shortened.
+* Linked list is the way to go.
+* It has a basic unit called node, which stores data and the address(i.e pointer) to the next node.
+
+There are 2 kinds of lists:
+1. Singly linked lists. Have the address of the next node.
+2. Douby linked lists. Have the address of the next and the previous node.
+* To operate with nodes, we need our own data structure, as none of the primitive data types support it.
+* We make a node class with data members 
+	1. data(int)
+	2. address(Node*)
+	Doubt: Node * is infinitely recursive. Node is. But Node* is not, it is just a pointer with a jump = sizeof(int + pointer). That is it.
+[[./LinkedList_Node.hpp|Node class, for linked list]]
+
+Jargon:
+1. Head node. The first Node.
+2. Tail Node. The last Node. It points to NULL.
+
+* We will use this class only as a node. Everything else is done in a functional way.
+

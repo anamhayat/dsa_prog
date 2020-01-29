@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-14T01:11:37+05:30
+
+====== zAssignment Polynomial Class ======
+Created Tuesday 14 January 2020
+
+[[./main_for_polynominal.cpp|main_for_polynominal.cpp]]
+[[./Polynomial_Class.cpp|Polynomial_Class.cpp]]
+[[./CodingNinjas_Polynomial_soln.cpp|CodingNinjas_Polynomial_soln.cpp]]

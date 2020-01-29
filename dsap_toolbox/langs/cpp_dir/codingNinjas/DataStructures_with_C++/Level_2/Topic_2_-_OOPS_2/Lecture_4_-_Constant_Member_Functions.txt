@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-11T10:40:08+05:30
+
+====== Lecture 4 - Constant Member Functions ======
+Created Saturday 11 January 2020
+
+If we create an object as a constant. Then all it's data members are also made constant.
+To avoid any mishap inside any of the member functions, the object can only invoke those functions which happen to be marked const. i.e We are sure that the data member is not allowed to be changed.
+
+* If our const mark is fake, then the const binding of the data member will be give an error.
+* How to mark. Put const between the parantheses and the definition code block.
+* Remember const first takes value then tags the path constant.
+* Non constant objects can access constant functions, no problem.
+https://stackoverflow.com/questions/6852717/what-can-a-const-method-change/6852734#6852734
+1. Const function can be invoked through both const and non const objects.
+2. Const objects can access only const functions. Hence only const functions are limited in their actions.
+
+Why mark as constant?: https://en.wikibooks.org/wiki/C%2B%2B_Programming/Programming_Languages/C%2B%2B/Code/Keywords/return

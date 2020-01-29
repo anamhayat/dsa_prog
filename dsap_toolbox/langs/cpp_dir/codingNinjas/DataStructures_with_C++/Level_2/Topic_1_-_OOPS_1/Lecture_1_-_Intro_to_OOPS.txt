@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-08T14:32:34+05:30
+
+====== Lecture 1 - Intro to OOPS ======
+Created Wednesday 08 January 2020
+
+* We want a style of programming where we can do work in like in real life. Our world is made up of objects, which have properties and interact with each other.
+* This makes our programming very intuitive and relatable.
+
+* Idea of a class:
+	When we have to do work on similar objects, it is better that we have a template with type/contraint of the values. The template should also have all the functions through which the object iteracts, with itself or with other objects. So, effectively, a class is a **blueprint**.
+	
+* Idea of an object:
+	An **object **is an instance of a class, and **occupies** some memory. On the other hand, class is a blueprint, so it does not occupy any memory.
+--------------------
+Syntax to create a class:
+	class //class_name//
+	//{//
+		//data_type_1 attrib1;//
+		//data_type_2 attrib2; // //only declarations, we can even do int marks[], i.e arrays too
+	//};//

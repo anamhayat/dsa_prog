@@ -1,0 +1,48 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-26T13:43:37+05:30
+
+====== Lecture 6 - Inline and Default Arguments ======
+Created Thursday 26 December 2019
+
+Some more helpul things in cpp.
+1. Ternary operator.
+	This is used to write if else loop(s) in a concise way.
+	**Syntax:** 
+		a. logical_expression ? value1 : value2;
+		b. We can do nesting too. Read here: https://www.geeksforgeeks.org/c-nested-ternary-operator/
+	**Use-cases: 	**
+		a. During assignment;
+		b. For general cases, in cout, cin etc. Prefer to use parentheses to avoid confusion.
+	**Disadvantage: **The readability decreases, while performance is somewhat better than using if else. It should be used only for simple statements
+--------------------
+2. Inline functions
+	**syntax: **inline f();// inline precedes the function prototype and definition.
+	**Case**: Suppose we need to have a program where we need to select the maximum of two integers. We used the ternary operator for the logic part.
+	We have also written a function, but for such small things, calling functions would be an unnecessary overhead. 
+	There's something called inline functions, where our code is expanded at the place of the function call(called **in-place expansion**).
+	**Expansion criteria: **The compiler decides if the function is suitable for expanding inline or performing a normal function call. If the function is bulkier, then the compiler will treat the function as a normal function, and no in-place expansion will take place. So using **inline **is only a **request**, and does not guarantee if the compiler will perform in-place expansion for the function.
+	* worth reading https://www.geeksforgeeks.org/inline-functions-cpp/
+	**Q) **Why don't we use all functions as inline irrespective of size, i.e why to use normal functions.
+	**A) **This is logic not helpful, because in-place expansion **does **increase the **size of the executable **file, which can be a bottleneck at many platforms.
+		* Functions have a their own sigificance, i.e to improve readability, optimize performance and executable size, easy debugging etc. **Inline **functions cannot take their place.
+--------------------
+3. Default functions:
+	* The formal parameters are assigned from left to right during call. **Irrespective of whether a parameter has  a default value or not, already known and intuitive.**
+	* The default parameters are **always present continuos to the right extreme** of the argument list. Else the program will **not **compile.
+		e.g int f(int x =0, int y = 0, int z) is **invalid**.
+	**Syntax:  **return_type f(int = 1, int =2 )
+	* The default args should be mentioned **only** in the function **declaration**, and **must **be **omitted** in the definiton. https://www.geeksforgeeks.org/interesting-facts-default-arguments-c/
+	* We can write int = 2, in place of int x = 2, in declaration. This is valid.
+	* worth reading https://www.geeksforgeeks.org/default-arguments-c/
+	
+	https://www.programiz.com/cpp-programming/default-argument
+	**Handling: **When overloading function, you should check that there's no ambiguity.
+	* As C++ does not perform bound checking, so the compliler has nothing but the name/number of args/default args(if any argument is omitted) as specified in the function call. 
+		e.g int sum(int x, int y, int z = 0) vs int sum(int x, int y, float z =0.0) ; this leads to ambiguity.
+	* Once default value is used as an argument in function definition, all subsequent arguments to it **must have default** value. It can also be stated as default arguments are assigned from right to left. 
+	* Default arguments cannot be the previous parameters, but global variables may be used as default. This is allowed though, for template parameters.
+ 
+
+
+

@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-18T12:30:35+05:30
+
+====== Topic 4 - Linked List 2 ======
+Created Saturday 18 January 2020
+

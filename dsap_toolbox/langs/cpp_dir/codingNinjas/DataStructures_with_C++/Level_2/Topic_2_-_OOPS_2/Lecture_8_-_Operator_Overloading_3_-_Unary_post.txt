@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-12T20:59:07+05:30
+
+====== Lecture 8 - Operator Overloading 3 - Unary post ======
+Created Sunday 12 January 2020
+
+1. ++ post.
+* Challenge 1: Both look the same, how to differentiate the pre and post?
+* Remember nesting is not defined on post increment nesting.
+**A) **Write int in the parentheses. This indicates that the operator is a post(i.e on the right side of the operand.
+As no nesting is valid, hence we don't need to be linked to the argument, hence reference does not need to be returned.
+
+2. +=
+* Binary Okay
+* Nesting is possible. Associatvity right to left. Hence return reference.
+
+
+Final:
+1. Check for unary vs binary. If unary, **do not take** anything in parentheses.
+2. Check for pre or post. If post, write (int) in the parentheses for indication. Else leave them empty.
+3. Check if nesting is allowed, if yes return references. Else return the object type itself.

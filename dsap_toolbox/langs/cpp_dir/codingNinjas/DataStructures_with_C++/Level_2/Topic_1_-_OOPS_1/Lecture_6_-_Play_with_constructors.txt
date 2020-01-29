@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-09T04:47:16+05:30
+
+====== Lecture 6 - Play with constructors ======
+Created Thursday 09 January 2020
+
+* If we write Student obj1 = obj2; // This is valid. But this is not a copy assignment, it is done by a copy constructor. 
+	This is actually(the rightmost part of the picture).
+{{./Selection_013.png}}
+Just Repeated. 

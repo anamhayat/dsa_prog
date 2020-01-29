@@ -1,0 +1,46 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-26T11:51:22+05:30
+
+====== Lecture 5 - Macros and Global Variables ======
+Created Thursday 26 December 2019
+
+* We are going to learn a few keywords which help us write better code.
+* Reason for using these keywords: Whatever we have learnt till now, is correct. But when it comes to some use-cases, we found that other methods are better optimized and/or help in organization. 
+* Format: Keyword along with syntax, reason and explanation.
+--------------------
+1. #define
+	**Syntax: **#define macro_template macro_expansion
+	**Reason/Motivation:**
+	use-case: Suppose we want to make a program which works with circles, we need to use π = 3.1416. 
+	* Now we can manually write 3.1416 everywhere in our code. That'll be too tedious to write, and difficult to change. And error prone, as a programmer may mess up the values at places.
+	* We can use a global variable names pi = 3.1416. This is okay but if our program has many constants, then it'll an overhead to do this. Also, we have to make sure that nobody/no-version has a different value. This is difficult.
+	**Explanation(Working):**
+	We need the best of both world's, i.e both maintainance and performance/checking_for_correctness. 
+	We use #define.
+	Consider another pre-procesor directive case, #include, this copies the file, in most cases iostream. So that we can use all the basic code.
+	#define pi 3.14, is also a pre-processor directive. It **replaces** each 'pi' written in our code by 3.14. This is done before the compiler acts on the source.
+	//It's basically a way where we just do some change(substitution) in our code, before compile time. So in compiled code, it'll seem as if 3.14 was written everywhere.//
+	**Note: **Any errors in the #define mostly go undetected.
+		https://www.geeksforgeeks.org/cc-preprocessors/
+	{{./Preprocessor-In-C.png?height=400}}
+	**About Macros:**
+	* Macros: Macros are a piece of code in a program which is given some name. Whenever this name is encountered by the compiler the compiler replaces the name with the actual piece of code. The ‘#define’ directive is used to define a macro.
+	* In the above program, when the compiler executes the word LIMIT it **replaces** it with 5. The **word** ‘LIMIT’ in the macro definition is called a **macro template** and ‘5’ is called the **macro expansion**.
+	**Note**: There is **no semi-colon**(‘;’) at the end of macro definition. Macro definitions **do not need** a semi-colon to end.
+	* Macros with arguments: We can also **pass arguments** to macros. Macros defined with arguments work similar to functions.
+		We can see from the above program that whenever the compiler finds AREA(l, b) in the program it replaces it with the statement (l*b) . Not only this, the values passed to the macro template AREA(l, b) will also be 			replaced in the statement (l*b). Therefore AREA(10, 5) will be equal to 10*5. [ # define AREA(l, b) = l*b ] **Note: ** No equal to is required.
+	**note: **Keep in mind that macros only copy and paste, so operator precedence should be taken care in output prdeiction.
+		e.g AREA(2+3, 4+5) will be replaced by 2+3*4+5 = 2+12+5 =19
+		// remember that in macro arguments, the only 'seperators' are commas or operators, whitespaces are also taken as part of the parameters(macro entities here). **Got it!! 😎️**
+--------------------
+2. Global Variables
+	**Syntax:  **Just define the variable outside of outside of every function, i.e it'll be accessible anywhere(assuming it is not shadowed😆️).
+	**Reason/Motivation:**
+	* We can access modify the value anywhere.
+	**Explanation(Working): **
+		Basic declaration and memory allocation. It is saved in a different part of the code, it's lifetime is the same as that of the program.
+	**About Global variables:**
+		It is a very **bad **practice to use global variables, if other ways like(call by reference are available). It can lead to very unintuitive scenarios, where we will have to check the whole program to find the bugs.
+	**Conceptual problems: **This is conceptually problematic as a variable that is used by all, if mishandled by some function, can **jeopardize** the whole program.
+--------------------

@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-25T10:56:15+05:30
+
+====== Lecture 2 - Reference and Pass by Reference ======
+Created Wednesday 25 December 2019
+
+* We want to make a variable name(not a pointer) with the address of a variable. This new variable name does not have a memory of its own. It is just an **alias **for an existing variable.
+* Just understand it as another record in the symbol table. A name. Copies the address and data type. (Data type needs to be same).
+**Syntax: **
+	int x = 10;
+	[[/*declaration*/]]  		**int** &y = x;		 // reference is not a pointer, it's an alias, so no need of assigning the address.
+	[[/*reassignment*/]] 		alias_1 = alias_2; //allowed
+	[[/*]] access/modification */	alias1++; // exactly the same as the original name . (Nothing like derefence here).
+	
+	/*function declaration*/	f(int &x);
+	[[/*]] passing a variable as reference*/ f(p); // interpreted as int &x = p; so no problems.
+**Note:**
+	* **References cannot be reassigned. As they are in the symbol table. **__And no change can be made in the symbol table, once written.__
+**Caution:**
+	int x = 10;
+	int &y; // invalid
+	**What do  we you want your address and type for your name in the symbol table? Absurd. **//Remember that we have to fill all fields in the symbol table and that they are unchangeable. Alhough //**values**//, can be changed.//
+	* **Hence reference variables need to be **initialized **at the time of declaration.**
+**Advantages of reference variables(i.e why are they useful): **
+1. We don't need to make pointers for each function call where we need to make changes to the same memory, during function calls. 
+2. No extra storage required. Good for memory.
+
+**Note: **As we can send values(by reference), we can **recieve **values as well. Called **return by reference. **
+**Caution: **//Return by reference// and //return by address// are very dangerous, as they can sometimes return reference and address, of local variables, respectively. **It's a bad practice.**
+https://www.bogotobogo.com/cplusplus/memoryallocation.php
+
+
+

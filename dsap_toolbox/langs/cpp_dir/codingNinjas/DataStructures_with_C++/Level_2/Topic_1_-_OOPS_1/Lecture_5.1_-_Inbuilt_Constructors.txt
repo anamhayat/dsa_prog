@@ -1,0 +1,61 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-08T20:58:26+05:30
+
+====== Lecture 5.1 - Inbuilt Constructors ======
+Created Wednesday 08 January 2020
+
+Number 0, 2, 3 and destructors are all given by the compiler, no need to code 2,3 and destructor at all. i.e copy, = and destructor.
+--------------------
+0. **Default contructor** does not need any invocation. It gives default values, if any. Provided by the compiler iff no(i.e of any type) constructor has been custom defined. There's no such condition with the other 2 + copy assignment operator.
+**BIG NOTE: **This means that we need to have a default constructor which needs to be explicitly defined if we make a param or custom copy constructor. **But, **our code will compile and run, if a default constructor is not defined and not required(i.e we initialize using args or other objects everytime.
+--------------------
+1. **Parameterized** constructor needs to have values passed.
+		Static :	Student obj1(val1, val2...);
+		Dynamic :	Student *obj1  = new Student(val1, val2...);
+--------------------
+2. **Copy constructor:**
+	It's a constructor(given by the compiler at all times) which takes a prexisting object as the argument, and copies all the data members to the new object. This copying is done through bit by bit copy from the original memory location. **It does shallow copy.**
+	We create an object which has all data_members the same as that of another prexisting object called obj1.
+	syntax:  just add a parenthesis to the class_name with the argument, otherwise no parentheses is needed.
+	
+	Note: 
+	* **Empty parenthesis should not be used. They are a part of C++'s **[[https://stackoverflow.com/questions/180172/default-constructor-with-empty-brackets|Most Vexing Parse]]  **wherein every empty () is treated as being a function declaration wherever it can be treated as such.**
+	* Although doing 'new Student()' is the same as 'new Student'. As this cannot be interpreted as a function definition.
+	* All 4 possible cases while using the copy constructor for object creation:
+		S from S:	Student obj1(obj0);
+		D from S:	Student *obj1  = new Student(obj0);
+		S from D:	Student obj2(*obj1);
+		D from D:	Student *obj3 = new Student(*obj1); 
+**Doubt/Motivation: Why don't we just copy each attribute expilcity?**
+	* That would be too tedious.
+	* The data members may not all be public.
+	* It acts as a duplicate button.
+**Note: **
+* If we've made an object statically and want to pass it in as an argument in a copy constructor, then pass *object_pointer and not the object pointer itself. Obviously the other 3 combinations work as intiuitively as this. Redundant.
+* If we wish to override the compiler-given copy constructor, use (const Student &t) as the formal param. This is due to C++policy of copy elision wherever internally possible.  [[https://www.geeksforgeeks.org/copy-constructor-argument-const/|Why copy constructor argument should be const reference in C++?]]
+Read for confidence: http://www.cplusplus.com/doc/tutorial/classes2/#copy_constructor
+--------------------
+3. **Copy assignment operator.** 
+If we need to copy data from one object to the other. Intuitively we will use =.
+Actually = has been overloaded to implement bit by bitcopying from rvalue to the lvalue object.
+Note: Beware of static and dynamically allocated objects, please **dereference ** before using this operator. 
+
+* This does shallow copying.
+
+syntax examples(All 4 cases);
+SS: 		s1 = s2; 
+SD: 	s1 = *s2;
+DS: 	*s1 = s2;
+DD:		*s1 = *s2;
+
+**Doubt: How does it differ with the copy constructor?**
+**A)  **This(=) operator is useful only if the two objects already exist. If one of them does not(i.e during declarization), then the copy constructor is called, not the assignment operator. i.e = will become a copy constructor in this case. [[./copy_vs_copy_assignment.cpp|Copy vs Copy assignment operator.cpp]]
+e.g
+Student x1 = x0; // this looks like copy assignment operator, but it is not. Copy constructor is called in this case, because x0 exists but x1 does not.
+http://www.cplusplus.com/doc/tutorial/classes2/#copy_assignment
+* Remember copy constructor is more primary than the assignment operator. The operators resorts to the copy constructor and not the other way around. **Remember this. **
+* Never use an object assignment inside a copy constructor or a copy assignment operator.
+* The form an infinite loop.
+--------------------
+

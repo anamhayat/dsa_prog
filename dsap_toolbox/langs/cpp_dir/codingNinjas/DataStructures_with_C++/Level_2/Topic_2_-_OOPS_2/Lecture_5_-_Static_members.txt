@@ -1,0 +1,30 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-11T11:20:52+05:30
+
+====== Lecture 5 - Static members ======
+Created Saturday 11 January 2020
+
+We'll study about static propeties of a class.
+
+STATIC DATA MEMBERS
+* static data members are variables which are given the same memory and are accessible to all objects. 
+* They are **present** even if no objects have been made. i.e They don't need an object to be created in order to be used.
+* They don't belong to the objects, but only the class.
+* They **were** be initialized outside the class, using the scope resolution operator.
+	i.e data_type class_name :: static_variable_name = value;
+	This is to void duplicate initializations at place wherever the class header has been copied. The static data member may be a private one.
+* https://en.cppreference.com/w/cpp/language/static#Static_data_members : We can initialize static data members inside the class itself, by using the inline specifier before the keyword. **Complete vs Incomplete **declaration.
+* Changes are also made using the same syntax.
+* Changes **are allowed **through the objects too, but should be avoided.
+* A constructor can be used to keep track of number of objects created. This is an appilcation.
+
+STATIC MEMBER FUNCTIONS
+* static means independent of the function call, or of the object in OOPS.
+* Static member functions are function which work only on static values and hence don't need an object to be invoked(you can do so if you wish, which is useless). They can be invoked using the class_name itself.
+* Non static data members and non-static functions cannot be used inside a static function. Because they don't have a this pointer included.
+* Static functions **don't have access to 'this'**. They can create their own non-static objects if required. They cannot make changes to the any object.
+* static member functions cannot be tagged const. https://stackoverflow.com/questions/7035356/c-why-static-member-function-cant-be-created-with-const-qualifier
+
+Quick Revision.
+https://www.tutorialspoint.com/cplusplus/cpp_static_members.htm

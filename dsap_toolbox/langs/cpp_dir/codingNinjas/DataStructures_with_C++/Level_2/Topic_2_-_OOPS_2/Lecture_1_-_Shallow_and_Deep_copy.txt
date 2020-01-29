@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-10T19:17:58+05:30
+
+====== Lecture 1 - Shallow and Deep copy ======
+Created Friday 10 January 2020
+
+Shallow copy vs Deep copy?
+* Shallow copy refers to the normal copying scenario of data members. The problem is that except for the standalone data members like int etc, some data members point to memories, e.g an array, a string etc. In the latter case, the destination object, hence retains the address. Now, this means that both objects have access to the same memory address. Consequently, any changes at the address of the data, means change for the original (source) object as well. This is stupid, as we should actually be forming a new array for the second object, and copy all values from the object/
+* Deep copy means that we make a copy of the data which is available only to our object, and cannot be changed by other objects and other parts of the program. **It does take some extra space. But it is very important.**
+e. g 
+* Both copy constructor and copy assignment operator do shallow copy.
+* Hence we need to overload the copy assignement operator and the copy constructor with a deep copy custom.

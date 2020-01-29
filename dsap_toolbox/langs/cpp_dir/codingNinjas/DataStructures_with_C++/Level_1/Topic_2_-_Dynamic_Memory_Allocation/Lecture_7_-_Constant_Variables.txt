@@ -1,0 +1,71 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-26T17:56:24+05:30
+
+====== Lecture 7 - Constant Variables ======
+Created Thursday 26 December 2019
+
+**Constant variables: **It's weird, but it just means that we are making a path, through which the value is not changeable.
+Syntax for const:
+	const //data_type variable name = initial_value; 	//**declararization is necessary.**
+**How it works?**
+	In the symbol table, we have had other fields like **access specifier**(public, private, friend), **data types modifiers**(signed, unsigned, long, short) and **variable** **type qualifiers**(const, volatile, extern, auto). 
+	* Data type modifier are with the data type. They are not a different field.
+	* Access specifiers are useful only in OOP. 
+	* Variable type specifier - These restrict operation on the variables(i.e read only, restricted write etc), hence qualifies them for different treatment w.r.t modification.
+**What does it do?**
+	const means **read only** for the variable, this is what is put in the symbol table.
+	They cannot be changes after they have been declarized.  
+**Note: **
+* Although if we use a const int* to make a** pointer to a constant integer **, or by using **constant** **reference**, then the value in RAM can be changed(by other variables only), coz only the **path **was made const, not the memory storage.
+	1. const reference. 
+		int a = 12;
+		const int& k = a;
+		cout << k; // line 1
+		a++; // this is valid
+		k++;// this is invalid
+		cout << k ; line 2
+		line 1 will print the same as line 2. **Perfectly valid.**
+		**reason: **When we made a const int &, we copied the address to a new tuple in the symbol table, changes the name to k, and made the type qualifier as const. This makes it look as if k is a const variable. Hence no operations are allowed **through **it. 
+		'a' has its qualifier as non const, so changes are possible **through **it.
+		Hence, we can say that **variable_name **and **quaifier **bind the read/write access in case of const.
+	2. const pointer also behaves the same as const reference. We cannot change the value(i.e memory location) through the pointer. 
+	**Q) **Does the comiler allow const int* to be allocated to an int*(and vice-versa), and why?
+	**A) **Yes, absolutely, we can, as first time allocation is allowed. But it is not allowed that we do a change at the memory location(which is stored **using** the address field of the variable which is const), this is caught by the compiler. We can surely print them. **This is how const is enforced.** **Obviously** the comiler keeps track of only the **symbol table** and not the memory itself, hence if we had stored the address of the variable before hand. We will be able to change its value. **This **holds in **both **the cases, pointer and reference.
+	
+	The converse, i.e int * gets assigned a const int*, no. // i.e this is **not allowed.** If this was allowed, then we can change the value. This change **cannot be tracked** by the compiler. Hence the compiler disallows this to **protect** the const value. **Yeh cheating nahin chalegi.** We cannot make a read only path as write. We will have to **qualify **as being a const before we assign a const rvalue. Same for the **reference**.
+	
+		int a = 2;
+		int *b1 = &a; // made a pointer
+		int &b2 = a; // made a refernce
+		const int *k1 = &a;	// made a const pointer
+		const int &k2 = a;		// made a const reference
+		*b1 = 100;		// made a change using an old pointer
+		cout << *k1<< ", ";
+		b2 = 200;			// made a change usinh the old reference
+		cout << k2 << endl;
+	
+	Output: 100, 200
+	
+	**Q) **Is this allowed?
+		int i = 10, j = 12;
+		int const * p = &i;
+		p = &j; // this step ?
+	**A) Yes, **this is absolutely valid because const makes paths constant, hence making a change at the **address** is not allowed. But changing the address **is** allowed. In the ? step, we should read from right to left, for the declaration, "I am p, i will not make change at the address I store, **but **I can change the address itself.  
+	
+	* For declaring a pointer whose address is not changeable do this
+	int * const p = &i; // Here p itself is unchangeable. But we can change the value at p. **Absolutely valid.**
+	* If we want to keep both the pointer and the value const, do this:
+	int const * const p = &i; // Neither address nor value at address changeable.
+**Verdict : **const is very intuitive when seen from a symbol table. But it's not required.
+Concise.
+1. Only paths(through) are blocked. Storage can never be tagged constant.
+2. We can go to the same level or lower. But not above. Level means chance/qualification of change. 
+3. Read the declaration from right to left.(One const can only put one restriction). https://developerinsider.co/what-is-the-difference-between-const-int-and-int-const/
+4. Use east const style.
+**Advantages: **
+	1. We used reference to decrease the argument copy overhead. by avoiding a pointer. By using const data_type, we protect it further from making changes. **Hence **we find const int at many places in the inbuilt functions.
+	2. Point 1 helps immensely in funtion calling.
+https://stackoverflow.com/questions/162480/const-int-vs-int-const-as-function-parameter-in-c-and-c
+**Sloppy regions(correct things below):**
+1. const data_type and data_type const is the same. For any case. Even if you use & and *.

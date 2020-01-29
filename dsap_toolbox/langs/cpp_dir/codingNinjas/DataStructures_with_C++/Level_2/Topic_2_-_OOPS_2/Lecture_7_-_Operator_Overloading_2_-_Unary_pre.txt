@@ -1,0 +1,52 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-11T16:56:04+05:30
+
+====== Lecture 7 - Operator Overloading 2 - Unary pre ======
+Created Saturday 11 January 2020
+
+We'll discuss about associativity, unary, binary and ternary here.
+* How is return working in the memory for a function?
+* If we overload ++, is it prefix or postfix?
+* Unary vs binary vs ternary in OOP?
+Binary: We've done that
+
+Unary: 
+1. void operator++()
+	{
+		a++;
+	}
+	**This is okay, but does not return the object. So we cannot print it(void).**
+2. Number operator++()
+	{
+		a++;
+		return *this;
+	}
+	We can copy here and output too. We return the whole object.
+	This is very interesting. If we try ++(++obj), then the value gets increased by 1 and not 2.
+	**Why?**
+	
+System buffers(and abstraction)
+* When we return an object, only it's value is returned. i.e Return by value is the default norm. Hence any changes on the returned value will not cause a change in the original variable.This can be avoided by using pointers. But that' be complex. Better we set the return **type as the reference**.
+* This is required in order to facilitate **nesting of operators.**
+3. Return Number&, this will mean that no extra buffer is created, i.e an alias will be returned. This means that we are working on the same object.
+
+#include <iostream>
+using namespace std;
+
+int &f();
+int main()
+{
+	int p = f(); // error 2
+	cout << p << endl;
+	return 0;
+}
+
+int &f()
+{
+	int x = 2;
+	return x; // error 1 here
+}
+* Now ++ can be used in **nesting** too, no problem. But what about the post increment operator.
+To sum up return http://www.cplusplus.com/doc/tutorial/classes2/#move
+https://en.wikibooks.org/wiki/C%2B%2B_Programming/Programming_Languages/C%2B%2B/Code/Keywords/return

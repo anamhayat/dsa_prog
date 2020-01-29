@@ -1,0 +1,44 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-08T16:49:28+05:30
+
+====== Lecture 4 - Constructors and 'this' keyword ======
+Created Wednesday 08 January 2020
+
+* Idea of a contructor: 
+	When we make an object, it **must have **some values(Atleast trivial, even if not initialized explicitly), it should **never be garbage. **Done with constructor. This also relieves us of assigning values by hand during creation, we can do so using parentheses.
+* When we create an object, a contructor **has to be** called.
+	For any constructor:
+	1. Name is the same as class.
+	2. No return type.
+	3. Called only once in the life-time of the object.
+
+* If **no** constructor(of any type)is defined, **then and only then** a 'compiler' default constructor will be suppiled by the compiler with an empty body. If we define a constructor of any type, then this comiler constructor goes out of scope for us.
+	The 'compiler' default constructor looks like this:
+	class_name()
+	{
+	}
+* There are 3 types of constructors:
+	1. Default constructor - No input argument. **It is named default coz it takes no argument for being called.**
+	2. Parameterized contructor -  has some input argument.
+	3. Copy constructor - Has an argument of the same object type.
+* Rules for constructors:
+	1. Constructors need to be unambiguos. Think of the scenarios which might break the program. 
+	2. Constructors are just function, nothing arbitrary here.
+	3. If a type of contructor is called, but it is not defined. Although atleast one constructor has been defined. Then this is a compilation error, as no matching constructor could be found. Also as we have some(at least) one constructor, hence no default constructor can be provided. **[Remember that only a default constructor with empty body can be supplied by the compiler].**  
+http://www.cplusplus.com/doc/tutorial/classes2/#default_constructor
+**Pro Tip:** A parameterized constructor can be passed default arguments, so that there's no need of seperate default constructor. Just take care of the ambiguity, which can be a runtime error.
+
+**Note**:
+1. A program will **compile**, even if only a (non default param)parameterized constructor is defined. But it will give runtime error if no params are given during its creation.
+--------------------
+* 'this' keyword
+1. To avoid naming issues, we have to come up with new parameter names for the data members in all our member functions.
+2. If we use the same name, then our data members will be shadowed by the formal parameters of the function.
+3. If we use the object name to differentiate the data members, it will be absurd, because
+	a. The class does not know an object before creation.
+	b. The object name will have to be changed for each instance.
+Solution: We have a keyword **this** which stores the pointer to the object. We can use it to do our job.
+syntax: this -> //data_member. //
+About **this: **It is available only inside the class.
+Note: We can still use our data_members directly, without 'this'. But only if it is not being overshadowed. So doing this->data_member is **redundant if no overshadowing is present**.

@@ -1,0 +1,28 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-11T00:12:39+05:30
+
+====== Lecture 3 - Constant Data Members - Intialization List ======
+Created Saturday 11 January 2020
+
+* What to do if we want a privata data member to b a constant?
+1. If we write only const, then it will have unchangeable garbage, useless. Error too.
+2. If we write const int in private, but it will be stuck and will be the same for all objects. useless again.
+To solve this problem, we need to use **initialization lists.**
+syntax:
+between the paranthesis and the definition code block. Write
+
+: data_member1(value_or_param1), data_member1(value_or_param1)
+
+{{./Selection_019.png}}
+**Note: **We should not write 'this' initialization list, **except for a reference variable**. That would give an error. The names are not overshadowed here.
+**What all is allowed?**
+* We can use all types of variables, even non-const and non-reference ones.
+* It is the first thing that is run after assigning memory.
+* Order does not matter.
+* Making a constructor(with initialization list) is a must if at least one data member is const or reference.
+
+Use case:
+1. If we want a const data member.
+2. If our class has reference data members.
+(Both need to be declarized).

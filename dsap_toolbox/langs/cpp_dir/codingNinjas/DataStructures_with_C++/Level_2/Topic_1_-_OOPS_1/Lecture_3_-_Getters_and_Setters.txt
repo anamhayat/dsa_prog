@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-08T16:13:16+05:30
+
+====== Lecture 3 - Getters and Setters ======
+Created Wednesday 08 January 2020
+
+Reason for getters(accessers) and setters(mutators):
+* Setters can check constraints imposed by us.
+{{./Selection_010.png}}
+* Getters can change the 'form' of the output so that it is readable for the requestsee.
+* It adds a layer of authorization. We may need to provide the passwords, as an argument.
+{{./Selection_011.png}}
+--------------------
+* When making a real world project, we **should **set the values of important(easy to misuse) data as private, in order to avoid any problems. 
+* The security here does not mean from outsiders, mostly no. It is for accidental or other errors.

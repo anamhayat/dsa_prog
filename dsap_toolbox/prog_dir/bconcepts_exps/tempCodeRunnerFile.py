@@ -1,0 +1,1 @@
+len(visited)<len(G2)

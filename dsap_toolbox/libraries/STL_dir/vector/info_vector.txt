@@ -1,0 +1,4 @@
+Saw vector from Bo Qian and other sources.
+Good references are:
+1.  http://www.yolinux.com/TUTORIALS/LinuxTutorialC++STL.html
+2. Saurabh Shukla sir at YouTube

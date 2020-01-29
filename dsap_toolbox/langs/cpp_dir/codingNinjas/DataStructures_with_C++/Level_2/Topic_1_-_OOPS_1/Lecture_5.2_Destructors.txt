@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-09T03:08:49+05:30
+
+====== Lecture 5.2 Destructors ======
+Created Thursday 09 January 2020
+
+This is provdided by default.
+**Rationale: **To deallocate memory that is being used for the object:
+Properties of a destructor:
+1. Has the name same as that of the class.
+2. Returns nothing.
+3. Never has any arguments.
+Difference:
+1. has to have ~ preceding the destructor_name(in thedefinition).
+2. Is of only one type: Non argument.
+* If no destructor has been called, the compiler provides one with an empty body. This provided destructor is not visible if we have defined a constructor of our own.
+**When is the destructor called?**
+A) There are two cases:
+	a. Static objects: The destructor is called automatically just as the variable is going out of scope.(Except overshadowing, which is **essesntially** not going out of scope).
+	b. Dynamic objects: When we go out of scope for a dynamic object, only the pointer on the stack is freed, not the object's memory in heap. So the destructor is never called. Only if we deallocate the memory, **will the destructor be called.**
+e.g for dynamically allocated.
+
+{{./Selection_012.png}}
+Here the destructor is called only for object s1 and s3, but not for s3.
+* The destructor will be invoked if we do delete s3;
+* Any DS's used by the 

@@ -1,0 +1,54 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-08T14:50:13+05:30
+
+====== Lecture 2 - Creating objects ======
+Created Wednesday 08 January 2020
+
+* objects are **nothing but** class variables.
+* As classes are merely user defined data types, so we can make a class by :
+	**Static allocation: **class_name //object_name //; 
+	// this allocates memory. variable of type student in the stack.
+	**Dynamic allocation: **class_name// * object_name //= new //class_name;//
+	// this creates a pointer in stack to a memory location in heap.
+	
+	This is **exactly **like we do for in-built data types.
+* Memory allocated for an object = sum of the memory of the attributes + (some other abstracted details). 
+* If we don't assign values, we will have some garbage values.
+
+**Q**) Where to create objects?
+**A**) We can create anywhere after the class has been defined.
+* To include classes from other files, place them in the some directory and just include them by doing 
+	#include "//complete_location/class_file_name.extnsn//"
+	**without the semicolon ( ; )**
+	note: 
+	1. If the file(to be included is in the same directory, just write 
+		#include "//class_file_name.extnsn//"
+	2. extnsn can be anything, C++ doesn't care!! use .h or .hpp though. **How?**
+# include directive copies all the text from the //class_file_name.extnsn to //
+--------------------
+Accessing members of an object:
+1. For statically allocated objects: 
+	We access the property using the dot (**.**) notation.
+	syntax: object_name.attribute_name
+2. For dynamically allocated objects:
+	We first need to go to the object using dereference operator. i.e (*object_pointer).
+	Then use the dot notation:
+	syntax: (*object_pointer).member_nam
+	* There's a shortcut for this, it is **exactly the** **same **as above:
+		object_pointer -> member_name
+ Note: This is possible only with public attributes/functions. Members can be both functions and attributes.
+--------------------
+Concept of Access Specifier in C++:
+	Access modifiers are keywords associated with attributes/functions which modify the level of access from outside the class.
+	We have three keywords: public, private and protected.
+Syntax: access_modifier:
+	attributes;
+	We can create more than a type of modifier section with the same modifier too, it is allowed.
+**Note: **When not specified, all things are **private **by deafult in a class.
+In java the same keywords are called modifiers.
+* Remember access specifiers work between classes, and not between objects. i.e Inside a class, every objects data is visible, even the private data members. Also, this pointer is known to the function through which we are calling 
+https://stackoverflow.com/questions/4117002/why-can-i-access-private-variables-in-the-copy-constructor
+--------------------
+
+
