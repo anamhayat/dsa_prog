@@ -161,27 +161,7 @@
 
 <details> <summary><strong>Code</strong></summary>
 
-</details>
 
-    // Following is the given Tree node structure.
-    /**************
-    template <typename T>
-    class TreeNode {
-    public:
-        T data;
-        vector<TreeNode<T>*> children;
-
-        TreeNode(T data) {
-            this->data = data;
-        }
-
-        ~TreeNode() {
-            for (int i = 0; i < children.size(); i++) {
-                delete children[i];
-            }
-        }
-    };
-    ***************/
     // Following is the given Tree node structure
     /**************
 
@@ -542,6 +522,173 @@
     }
 
     // Insights: It is is very important to consider the root too.
+
+</details>
+
+---
+
+</details>
+
+<details> <summary><strong> 5. Next larger </strong></summary>
+
+# 6. Second Largest Element In Tree
+
+    Given a generic tree, find and return the node with second largest value in given tree. Return NULL if no node with required value is present.
+
+**Input Format**
+
+    Line 1 : Elements in level order form separated by space (as per done in class).
+    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
+
+**Output Format**
+
+    Second Largest node data
+
+**Sample Input 1**
+
+    10 3 20 30 40 2 40 50 0 0 0 0
+
+**Sample Output 1**
+
+    40
+
+<details> <summary><strong>Code</strong></summary>
+
+    // Following is the given Tree node structure
+    /**************
+
+        template <typename T>
+        class TreeNode {
+        public:
+            T data;
+            vector<TreeNode<T>*> children;
+
+            TreeNode(T data) {
+                this->data = data;
+            }
+
+            ~TreeNode() {
+                for (int i = 0; i < children.size(); i++) {
+                    delete children[i];
+                }
+            }
+        };
+        ***************/
+    #include <queue>
+    TreeNode<int> *secondLargest(TreeNode<int> *root)
+    {
+        if (root == NULL)
+            return root;
+
+        queue<TreeNode<int> *> nodesPending;
+
+        nodesPending.push(root);
+
+        int curr = root->data, max = root->data, max1 = root->data; //max1 > max1 always except initially
+        // but no redundancy is present for pointers
+
+        TreeNode<int> *trav;        // for the traversal variable
+        TreeNode<int> *ret = NULL;  // for the 2nd highest node pointer
+        TreeNode<int> *ret1 = NULL; // for highest node pointer
+
+        while (nodesPending.size() != 0)
+        {
+            trav = nodesPending.front();
+            nodesPending.pop();
+            for (int i = 0; i < trav->children.size(); i++)
+            {
+                curr = trav->children.at(i)->data;
+                if (curr > max1)
+                {
+                    max = max1;
+                    max1 = curr;
+                    ret = ret1;
+                    ret1 = trav->children.at(i);
+                }
+                else if (curr > max)
+                {
+                    max = curr;
+                    ret = trav->children.at(i);
+                }
+                nodesPending.push(trav->children.at(i));
+            }
+        }
+        return ret;
+    }
+
+</details>
+
+---
+
+</details>
+
+<details> <summary><strong> 5. Next larger </strong></summary>
+
+# 7. Replace with depth
+
+    In a given Generic Tree, replace each node with its depth value. You need to just update the data of each node, no need to return or print anything.
+
+**Input Format**
+
+    Line 1 : Elements in level order form separated by space (as per done in class).
+
+    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
+
+**Sample Input 1**
+
+    10 3 20 30 40 2 40 50 0 0 0 0
+
+**Sample Output 1**
+
+    0
+    1 1 1
+    2 2
+
+<details> <summary><strong>Code</strong></summary>
+
+    // Following is the given Tree node structure
+    /**************
+    template <typename T>
+    class TreeNode {
+    public:
+        T data;
+        vector<TreeNode<T>*> children;
+
+        TreeNode(T data) {
+            this->data = data;
+        }
+
+        ~TreeNode() {
+            for (int i = 0; i < children.size(); i++) {
+                delete children[i];
+            }
+        }
+    };
+    ***************/
+
+    void helper(TreeNode<int>* root, int d);
+    void replaceWithDepthValue(TreeNode<int> *root)
+    {
+        // edge case
+        if(root==NULL)
+            return;
+        root->data = 0;
+        helper(root, 0);
+    }
+
+    void helper(TreeNode<int>* root, int d)
+    {
+        // do work only for the children
+        if(root->children.size()==0)    //leaves have already been taken care of, as they were children
+            return;
+
+        for(int i=0; i<root->children.size(); i++)
+        {
+            root->children.at(i)->data = d+1;
+            helper(root->children.at(i), d+1);
+        }
+        // okay
+    }
 
 </details>
 

@@ -20,4 +20,8 @@ One way to make the loop can be to keep to keep the address of of children. Opti
 * About templates, when we write an object inside a templated class, it is automatically assume to be of type T, unless stated otherwise.
 {{./Selection_022.png}} {{./Selection_021.png}}
 First one is implicit, while the second one is explicit.
+Keep it explicit where it is supposed to be.
 
+What all is deducable? c++17 is better, it can deduce type.
+TreeNode<int>* p = new TreeNode(2); will work in c++17 but not in old versions. new TreeNode<int>(2) is required. 
+https://en.cppreference.com/w/cpp/language/class_template_argument_deduction

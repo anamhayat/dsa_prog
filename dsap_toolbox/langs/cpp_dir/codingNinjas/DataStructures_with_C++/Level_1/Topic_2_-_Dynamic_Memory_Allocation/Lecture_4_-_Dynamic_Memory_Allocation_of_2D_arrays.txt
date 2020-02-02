@@ -25,3 +25,4 @@ Created Wednesday 25 December 2019
 Stack vs Heap: https://www.geeksforgeeks.org/stack-vs-heap-memory-allocation/
 **We have a lot of power now.  Alhamdulillah. We can do whatever we want. **We can make data structures of all kinds using our programming language skills.
 
+* delete NULL is just ignored.
