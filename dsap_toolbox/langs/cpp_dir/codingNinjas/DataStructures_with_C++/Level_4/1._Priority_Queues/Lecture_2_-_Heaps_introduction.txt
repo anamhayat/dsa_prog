@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T13:48:51+05:30
+
+====== Lecture 2 - Heaps introduction ======
+Created Friday 14 February 2020
+
+BST has the following disadvantages:
+1. Balancing factor, we have to check if it is balanced, after every insertion/deletion.
+2. Storing is difficult, i.e nodes->data + nodes*pointers, i.e as Binary Tree. Too much size requirement.
+
+So we made a new data structure - called heaps:
+1. **It is a complete binary tree.** -  it has 2^{h}-1 spaces. Complete- all levels completely filled. Except the last level.(Which does not have to be all filled, but must be filled from left to right).
+Insertion and deletion must be done at the(to be) last node, so as to keep the CBT property intact.
+Proof: 
+	a. We can prove this mathematically, which is ok.
+	b. Based on intuition, we can see that the tree does not waste any space. Hence height always remains log_{2}n.
+2. **Heap order property.**
+ 

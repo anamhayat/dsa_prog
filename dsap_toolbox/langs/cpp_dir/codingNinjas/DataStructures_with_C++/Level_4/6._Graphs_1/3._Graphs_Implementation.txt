@@ -1,0 +1,33 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-30T15:54:11+05:30
+
+====== 3. Graphs Implementation ======
+Created Monday 30 March 2020
+
+There are 3 types of implementations:
+1. **Edge List**
+	We can save all the vertices in a vector. And then we can store the set of edges as 2-tuples of neighbours.
+	* V = {v1, v2, v3 ...}
+	* E = {(v1,v2), (v2, v3),...}
+	* This is very slow because even to check if A and B are neighbours, we'd need to do a linear search. i.e ~nC2 searches = O(n^{2}) = O(E)
+	* Space is O(E)
+	* __Definitely not good.__
+2. **Adjacency List** 
+	We will store all the vertices(i.e there addresses). Then we can link a vector to each of the vertices, which will store the address of its vertices. This is very nice.
+	* V = {v1, v2, v3 ...}
+	* Edges are represented as children of a node. Just like n-ary trees.
+	* Checking A is a neigbour of B is O(n) for a children array, or we can use a hashmap.
+	* It is space efficient.
+	* Really fast.
+	* Difficult to implement.
+3. **Adjacency Matrix**
+	We don't need to store the vertices seperately.
+	* We'll make a square matrix of size |V|*|V| with each element storing true or false, corresponding to the point "is neighbour" (A,B).
+	* The fastest - pure O(1). Just access G[A][B] for checking if A and B are neighbours.
+	* The most space **in**efficient. Any graph is treated as if it is a complete graph.
+	* Bad for sparse graphs. i.e where edges ~ V. Very few trues and many falses.
+
+Verdict: Adjacency matrix is faster than Adjacency list. We use it if we have no space constraint. We use a list when space also matters. Generally matrices are used for competitions, where speed matters.
+
+**We will be using adjacency matrix as it is the most easy to implement.**

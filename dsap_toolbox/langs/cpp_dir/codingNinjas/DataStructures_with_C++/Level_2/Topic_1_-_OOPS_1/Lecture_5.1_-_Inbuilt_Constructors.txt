@@ -56,6 +56,6 @@ Student x1 = x0; // this looks like copy assignment operator, but it is not. Cop
 http://www.cplusplus.com/doc/tutorial/classes2/#copy_assignment
 * Remember copy constructor is more primary than the assignment operator. The operators resorts to the copy constructor and not the other way around. **Remember this. **
 * Never use an object assignment inside a copy constructor or a copy assignment operator.
-* The form an infinite loop.
+* They form an infinite loop.
 --------------------
 

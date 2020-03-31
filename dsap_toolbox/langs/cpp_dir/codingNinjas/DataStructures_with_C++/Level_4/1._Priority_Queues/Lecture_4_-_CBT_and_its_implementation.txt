@@ -1,0 +1,33 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T14:19:27+05:30
+
+====== Lecture 4 - CBT and its implementation ======
+Created Friday 14 February 2020
+
+CBT is always balanced. So one overhead of BST is resolved. 
+The other overhead is also resolved:
+Store the CBT in levelOrder. This means that, for the i'th node
+leftChild = 2*i+1
+rightChild = 2*i+2
+Proof:
+
+
+We have the CBT in level Order traversal. 
+Suppose that we are on the starting node of a level(any level).
+* Number of nodes before this node = i = 2^{h-1}-1
+* Number of nodes in this level = 2^{h-1}
+* index of Left child of this node = number of nodes before it = before+this_level = 2^{h-1}-1 + 2^{h-1}=2*i+1		; because i = 2^{h-1}-1;
+* right child = left child+1 = 2*i+2
+
+This is true for the first node in the level: left = 2*i+1, right = 2*i+2
+For the second node, we have left = 2*i+2+1 = 2*(i+1)+1, right = left +1 = 2*(i+1)+2
+And so on for all, until we reach the first of another level. And the process continues.
+
+Base case: For the root, left  = 2*0+1 = 1; right = 2*0+2 = 2.
+Hence this is proved by induction.
+--------------------
+* Now for the child to parent, we need to find the i
+If we divide by 2, we have i+1/2 and i+1 respectively, which are different. But we need a formula which gets us the same formula. **Solution: **do (nI-1)/2, here we will get i and i+1/2 which are both i.
+--------------------
+We store data in an array for very fast, i.e O(1) access as well as fast insert and update.

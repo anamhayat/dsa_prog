@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/sanjar/arduino-1.8.12-linux64/arduino-1.8.12/tools/**",
+                "/home/sanjar/arduino-1.8.12-linux64/arduino-1.8.12/hardware/arduino/avr/**",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "forcedInclude": [
+                "/home/sanjar/arduino-1.8.12-linux64/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Arduino.h"
+            ]
+        }
+    ],
+    "version": 4
+}

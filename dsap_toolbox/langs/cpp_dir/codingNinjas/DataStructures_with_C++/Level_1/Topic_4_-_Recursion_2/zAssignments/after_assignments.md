@@ -83,12 +83,21 @@
 
     int staircase(int n)
     {
-        if (n < 0)
-            return 0;
-        if (n == 0)
-            return 1; // there's only one way to do this, i.e do nothung just like zero factorial. Has only one leaf node.
-        return staircase(n - 1) + staircase(n - 2) + staircase(n - 3);
-        // number of leaf nodes
+        if(n<0)
+            return 0; // no possible way to do this
+
+        if(n==0)    // i.e we took a full step of length 1 or 2 or 3. Mark it as 'a' step.
+            return 1;
+        // taking no step is also a single operation. i.e don't move 0C0. This will not affect our ops in any way
+
+        // we take a step of length 1 or 2 or 3, the remaining length's way's into 1 for each term
+        // i.e
+        // 1 f(n-1)
+        // 2 f(n-2)
+        // 3 f(n-3)
+        // add them up = 1*f(n-1) + 1*f(n-2) + 1*f(n-3) = f(n-1) + f(n-2) + f(n-3)
+
+        return staircase(n-1) + staircase(n-2) + staircase(n-3);
     }
 
     //  Resources

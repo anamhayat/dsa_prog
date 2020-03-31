@@ -1,0 +1,3 @@
+
+    delete &p;
+    cout << endl;

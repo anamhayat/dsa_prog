@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T15:43:16+05:30
+
+====== Lecture 5 - Insert and delete in Heaps ======
+Created Friday 14 February 2020
+
+As we have two priority queues: i.e min and Max heap. 
+min heap: minimum at index 0.
+max heap: maximum at index 0.
+
+In case of weights: Only min heaps are possible in nature.
+
+Heap order property: The parent is **smaller** than its children. MinHeap.
+The parent is **greater** than its children. MaxHeap.
+
+* Remember, this is not a BST. So we care only for the parent and children.
+* BST cares about left and right, while heap cares only one direction, down.
+--------------------
+**Insertion**: We insert data as the last node in the CBT. Then **sift-it-up**, until heap order property is satisfied. At root it is going to hold by default. Proved.
+--------------------
+**Deletion: **We know that one node has to go and that is the last node in the CBT. We cannot delete any other node. 
+1. We copy the value of the last node at the root. 
+2. We delete the last value. CBT property OK!
+3. We have to sift the root now to the appropriate position 
+	But how to decide wether left or right. We swap with the min as that will ensure that the heap property is staisfied with the other child. If **this is **not done, then we will have max over min. **Don't **worry about the swapped value, wether it is final or not. Because min and ma wont be satisfied anyway.
+4. When we sift like this, we will reach the end, as the last node is the largest. 

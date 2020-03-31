@@ -26,6 +26,6 @@ If we had to work with basic strings, we would've needed a 2D matrix and all.
 4. **Find**, s.**find(**key**)**: returns the index correpsonding to the first occurrence of the key. returns -1 if not found. Can be used to seatch substrings.
 5. **To check if string s is empty**. s.**empty()**, returns true for empty string, false otherwise.
 **Catch: ** Using substr to splice from index i to index j (excluding).
-Just do 
+Just do substr(i, j-i+1);
 No headers are srequired for any of these.
 * Dont't think of unneccessary details.

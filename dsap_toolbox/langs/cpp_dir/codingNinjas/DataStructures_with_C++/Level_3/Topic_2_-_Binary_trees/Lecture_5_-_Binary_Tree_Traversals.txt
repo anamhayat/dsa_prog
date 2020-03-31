@@ -6,9 +6,9 @@ Creation-Date: 2020-02-01T11:59:55+05:30
 Created Saturday 01 February 2020
 
 1. PreOrder traversal: Node LeftSubtree RightSubtree.
-2. Inorder traversal:  LeftSubTree Node  RightSubtree. Binary tree exclusive.
+2. InOrder traversal:  LeftSubTree Node  RightSubtree. Binary tree exclusive.
 3. Postorder traversal: LeftSubtree RightSubtree Node.
-4. Inorder: use a queue.
+4. LevelOrder traversal: use a queue.
 
 [[./BinaryTreeNode.h|BinaryTreeNode.h]]
 [[./treeMain.cpp|treeMain.cpp]]

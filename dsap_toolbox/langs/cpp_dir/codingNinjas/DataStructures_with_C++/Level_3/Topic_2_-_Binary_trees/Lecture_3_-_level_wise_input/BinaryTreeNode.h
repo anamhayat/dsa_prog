@@ -124,3 +124,19 @@ BinaryTreeNode<T> *levelWiseInput()
     cout << "\n";
     return root;
 }
+
+template <typename T>
+void level_n_print(BinaryTreeNode<T> *root, int n)
+{
+    if (root == NULL)
+        return;
+
+    if (n == 0)
+    {
+        cout << root->data << " ";
+        return;
+    }
+
+    level_n_print(root->left, n - 1);
+    level_n_print(root->right, n - 1);
+}

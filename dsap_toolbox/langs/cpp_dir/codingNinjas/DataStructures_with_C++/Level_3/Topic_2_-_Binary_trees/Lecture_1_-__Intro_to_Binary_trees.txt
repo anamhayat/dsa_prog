@@ -21,7 +21,7 @@ Created Thursday 30 January 2020
 Note:
 	 1  and 1
 	/		    \
- 2		     		2 are **different(bit by bit)** here. **They are the same even in generic trees. Order did matter there.**
+ 2		     		2 are **different(bit by bit)** here. **They are the same even in generic trees. Order did matter there too.**
 * The problem is that the skewed tree is different because the size of the child structure is fixed to 2. Hence two possibilities are present.
 
 * We have created left and right due to restriction in the system, arbitarirness of left and right, this will be useful later.

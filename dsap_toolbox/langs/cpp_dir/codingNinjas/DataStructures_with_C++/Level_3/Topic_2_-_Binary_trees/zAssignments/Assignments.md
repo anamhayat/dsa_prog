@@ -1,120 +1,118 @@
 # Assignments
 
-<details> <summary><strong> 1. Contains x </strong></summary>
+<details> <summary><strong> 1. Sum of all nodes </strong></summary>
 
-# 1. Contains x
+# 1. Sum of all nodes
 
-    Given a generic tree and an integer x, check if x is present in the given tree or not. Return true if x is present, return false otherwise.
+    Given a binary tree, find and return the sum of all nodes.
 
 **Input format**
 
-    Line 1 : Integer x
+    Elements in level order form (separated by space). If any node does not have left or right child, take -1 in its place.
 
-    Line 2 : Elements in level order form separated by space (as per done in class).
-    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
+**Sample Input**
 
-**Output format**
+    5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
 
-    true or false
+**Sample Output**
 
-**Sample Input 1**
-
-    40
-    10 3 20 30 40 2 40 50 0 0 0 0
-
-**Sample Output 1**
-
-    true
-
-**Sample Input 2**
-
-    4
-    10 3 20 30 40 2 40 50 0 0 0 0
-
-**Sample Output 2**
-
-    false
+    35
 
 <details> <summary><strong>Code</strong></summary>
 
-    // Following is the given Tree node structure.
+    // Following is the Binary Tree node structure
     /**************
-    template <typename T>
-    class TreeNode {
-    public:
+    class BinaryTreeNode {
+        public :
         T data;
-        vector<TreeNode<T>*> children;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
 
-        TreeNode(T data) {
-            this->data = data;
-        }
-
-        ~TreeNode() {
-            for (int i = 0; i < children.size(); i++) {
-                delete children[i];
-            }
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
         }
     };
     ***************/
 
-    bool containsX(TreeNode<int> *root, int x)
+    int sumOfAllNodes(BinaryTreeNode<int> *root)
     {
-        // random search is the only option as none of the children provide any clue
-        // approach: preOrder traversal
-
-        //edge case
+        // preorder traversal
         if (root == NULL)
-            return false;
+            return 0;
 
-        if (root->data == x)
-            return true;
-
-        bool ret = false; // this is for exiting when we find the match, no nee to search further
-
-        // checks
-        for (int i = 0; i < root->children.size() && ret == false; i++)
-            ret = containsX(root->children.at(i), x);
-
-        return ret;
+        return root->data + sumOfAllNodes(root->left) + sumOfAllNodes(root->right);
     }
 
+</details>
 
-    // approach 2 - level order traversal, iterative as it uses queue
+---
 
-    #include <queue>
-    bool containsX(TreeNode<int> *root, int x)
+</details>
+
+<details> <summary><strong> 2. is Balanced </strong></summary>
+
+# 2. is Balanced
+
+    Given a binary tree, check if its balanced i.e. depth of left and right subtrees of every node differ by at max 1. Return true if given binary tree is balanced, false otherwise.
+
+**Input Format**
+
+    Elements in level order form (separated by space). If any node does not have left or right child, take -1 in its place.
+
+**Sample Input 1**
+
+    5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
+
+**Sample Output 1**
+
+    false
+
+**Sample Input 2**
+
+    1 2 3 -1 -1 -1 -1
+
+**Sample Output 2**
+
+    true
+
+<details> <summary><strong>Code</strong></summary>
+
+    // Following is the Binary Tree node structure
+    /**************
+    class BinaryTreeNode {
+        public :
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+    ***************/
+
+    // we need this function
+    int height(BinaryTreeNode<int> *root)
     {
-        // random search is the only option as none of the children provide any clue
-        // approach: level traversal
-
-        //edge case
         if (root == NULL)
-            return false;
+            return 0;
+        return 1 + max(height(root->left), height(root->right));
+    }
 
-        // not possible after a queue is made, coz all things pushed in the queue
-        // have not been able to match
-        // i.e we scan only children. And root is nobody's child
-        if (root->data == x)
+    bool isBalanced(BinaryTreeNode<int> *root)
+    {
+        if (root == NULL)
             return true;
 
-        queue<TreeNode<int> *> nodesPending;
-        nodesPending.push(root);
-        TreeNode<int> *temp = nodesPending.front();
+        int dif = height(root->left) - height(root->right);
+        dif = dif > 0 ? dif : -dif;
 
-        while (nodesPending.size() != 0)
-        {
-            for (int i = 0; i < temp->children.size(); i++)
-            {
-                if (temp->children.at(i)->data == x)
-                    return true;
-                nodesPending.push(temp->children.at(i));    // push the subtree source atleast
-            }
-            // took all the children, none of them match
-            nodesPending.pop();
-            temp = nodesPending.front();
-        }
-
-        // nothing found
+        if (dif <= 1)
+            return isBalanced(root->left) && isBalanced(root->right);
         return false;
     }
 
@@ -124,176 +122,109 @@
 
 </details>
 
-<details> <summary><strong> 2. Count nodes </strong></summary>
+<details> <summary><strong> 3. Level order traversal </strong></summary>
 
-# 2. Count nodes
+# 3. Level order traversal
 
-    Given a tree and an integer x, find and return the number of Nodes which are greater than x.
+    Given a binary tree, print the level order traversal. Make sure each level start in new line.
 
 **Input Format**
 
-    Line 1 : Integer x
-
-    Line 2 : Elements in level order form separated by space (as per done in class).
-    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
+    Elements in level order form (separated by space). If any node does not have left or right child, take -1 in its place.
 
 **Output Format**
 
-    Count of nodes greater than x
+    Elements are printed level wise, each level in new line (separated by space).
 
 **Sample Input**
 
-    35
-    10 3 20 30 40 2 40 50 0 0 0 0
-
-**Sample Output**
-
-    3
-
-**Sample Input**
-
-    10
-    10 3 20 30 40 2 40 50 0 0 0 0
+    5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
 
 **Sample Output**
 
     5
+    6 10
+    2 3
+    9
 
 <details> <summary><strong>Code</strong></summary>
 
-
-    // Following is the given Tree node structure
+    // Following is the Binary Tree node structure
     /**************
-
-    template <typename T>
-    class TreeNode {
-    public:
+    class BinaryTreeNode {
+        public :
         T data;
-        vector<TreeNode<T>*> children;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
 
-        TreeNode(T data) {
-            this->data = data;
-        }
-
-        ~TreeNode() {
-            for (int i = 0; i < children.size(); i++) {
-                delete children[i];
-            }
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
         }
     };
+
     ***************/
 
-    int nodesGreaterThanX(TreeNode<int> *root, int x)
+    void printLevelATNewLine(BinaryTreeNode<int> *root)
     {
-        // need to traverse all the nodes
-
-        // using recursion, preorder traversal
-
         if (root == NULL)
-            return 0;
+            return;
 
-        int ans = 0;
+        queue<BinaryTreeNode<int> *> q;
+        q.push(root);
+        q.push(NULL);
 
-        //recursive logic
-        // f(root, x) = status of root vs x(1 or 0) + f(for all subtrees)
+        // passes a level with the line seperator Base case
+        // this line seperator will be encountered only if all of the previous nodes children have been take care of. Forward case
 
-        if (root->data > x)
-            ans = 1;
-        for (int i = 0; i < root->children.size(); i++)
-            ans += nodesGreaterThanX(root->children.at(i), x);
-        return ans;
-    }
-
-</details>
-
----
-
-</details>
-
-<details> <summary><strong> 3. Node with maximum child sum </strong></summary>
-
-# 3. Node with maximum child sum
-
-    Given a tree, find and return the node for which sum of data of all children and the node itself is maximum. In the sum, data of node itself and data of immediate children is to be taken.
-
-**Input Format**
-
-    Line 1 : Elements in level order form separated by space (as per done in class).
-    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
-
-**Output Format**
-
-    Node with maximum sum.
-
-**Sample Input 1**
-
-    5 3 1 2 3 1 15 2 4 5 1 6 0 0 0 0
-
-**Sample Output 1**
-
-    1
-
-<details> <summary><strong>Code</strong></summary>
-
-    // Following is the given Tree node structure
-    /**************
-
-    template <typename T>
-    class TreeNode {
-    public:
-        T data;
-        vector<TreeNode<T>*> children;
-
-        TreeNode(T data) {
-            this->data = data;
-        }
-
-        ~TreeNode() {
-            for (int i = 0; i < children.size(); i++) {
-                delete children[i];
-            }
-        }
-    };
-    ***************/
-    #include <queue>
-    TreeNode<int> *maxSumNode(TreeNode<int> *root)
-    {
-        // avoid using recursion. Use queue
-
-        // edge case + obvious case
-        if (root == NULL || root->children.size() == 0)
-            return root;
-
-        queue<TreeNode<int> *> nodesPending;
-
-        nodesPending.push(root);
-
-        int currSum = 0, prevSum = -1;
-        TreeNode<int> *trav = root;
-        TreeNode<int> *max_node;
-        while (nodesPending.size() != 0)
+        BinaryTreeNode<int> *temp;
+        while (!q.empty())
         {
-            trav = nodesPending.front();
-            nodesPending.pop();
-            currSum = trav->data; // node itself
+            temp = q.front();
+            q.pop();
 
-            //sum of the chilren
-            for (int i = 0; i < trav->children.size(); i++)
+            if (temp == NULL)
             {
-                currSum += trav->children.at(i)->data;
-                nodesPending.push(trav->children.at(i));
+                // a. If this is the last NULL
+                if (q.empty())
+                    return;
+
+                // b. this is not the last NULL
+                q.push(NULL); // the for the present generation
+                cout << endl;
+                continue; // because temp needs to be changed
             }
 
-            // we need to hold sum to record it
-            if (currSum > prevSum)
-            {
-                max_node = trav;
-                prevSum = currSum;
-            }
-            // got the value for trav
+            cout << temp->data << " ";
+            // take in children belonging to all
+            if (temp->left != NULL)
+                q.push(temp->left);
+            if (temp->right != NULL)
+                q.push(temp->right);
         }
-        return max_node;
     }
+
+    /* Painful insights:
+
+        We assume that we have the ability to print all the children on a level with a NULL as line end.
+
+        If this is possible, we can do the following.
+            We start to push the children of the present level one by one.
+            Hence we successfully have pushed a generation of nodes.
+
+            When we encounter the NULL, two cases are possible:
+            a. The list is empty and everything has been printed, Break;
+            b. We have more chilren remaining. As we have already pushed the generation of nodes
+                push the NULL as the end value. print newline. continue , because we need the q.front() for adding the children
+
+            If we don't have a NULL, just push the non-NULL children of the node.
+            T.C = O(n), Space complexity = O(n)
+
+        If this is not possible.
+            Ha ha ha, is is possible.
+
+    /*
 
 </details>
 
@@ -301,113 +232,62 @@
 
 </details>
 
-<details> <summary><strong> 4. Structurally identical </strong></summary>
+<details> <summary><strong> 4. Remove Leaf nodes </strong></summary>
 
-# 4. Structurally identical
+# 4. Remove Leaf nodes
 
-    Given two Generic trees, return true if they are structurally identical i.e. they are made of nodes with the same values arranged in the same way.
+    Remove all leaf nodes from a given Binary Tree. Leaf nodes are those nodes, which don't have any children.
+
+    Note : Root will also be a leaf node if it doesn't have left and right child. You don't need to print the tree, just remove all leaf nodes and return the updated root.
 
 **Input Format**
 
-    Line 1 : Tree 1 elements in level order form separated by space (as per done in class).
-    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
+    Elements in level order form (separated by space)
 
-    Line 2 : Tree 2 elements in level order form separated by space (as per done in class).
-    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
+    (If any node does not have left or right child, take -1 in its place)
 
 **Output Format**
 
-    true or false
+    Elements are printed level wise, each level in new line (separated by space).
 
-**Constraints**
+**Sample Input**
 
-    Time Limit: 1 second
-    Size of input array lies in the range: [1, 1000000]
+    8 3 10 1 6 -1 14 -1 -1 4 7 13 -1 -1 -1 -1 -1 -1 -1
 
-**Sample Input 1**
+**Sample Output**
 
-    10 3 20 30 40 2 40 50 0 0 0 0
-    10 3 20 30 40 2 40 50 0 0 0 0
-
-**Sample Output 1**
-
-    true
-
-**Sample Input 2**
-
-    10 3 20 30 40 2 40 50 0 0 0 0
-    10 3 2 30 40 2 40 50 0 0 0 0
-
-**Sample Output 2**
-
-    false
+    8
+    3 10
+    6 14
 
 <details> <summary><strong>Code</strong></summary>
 
-    // Following is the Tree node structure
+    // Following is the Binary Tree node structure
     /**************
-    template <typename T>
-    class TreeNode {
-    public:
+    class BinaryTreeNode {
+        public :
         T data;
-        vector<TreeNode<T>*> children;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
 
-        TreeNode(T data) {
-            this->data = data;
-        }
-
-        ~TreeNode() {
-            for (int i = 0; i < children.size(); i++) {
-                delete children[i];
-            }
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
         }
     };
     ***************/
 
-    bool isIdentical(TreeNode<int> *root1, TreeNode<int> *root2)
+    BinaryTreeNode<int> *removeLeafNodes(BinaryTreeNode<int> *root)
     {
-        // doing recursively
-        // What is the thing which makes two trees identical?
-        // A: Each corresponding node has the same property, assuming the corresponding nodes exist. i.e we don't run out of children.
+        if (root == NULL)
+            return NULL;
 
-        // observable quantities are
-        // a. root->data
-        // b. root->children.size()
-        // a && b should be true for at all times
-
-        if (root1 == NULL || root2 == NULL) // both or one is NULL
-        {
-            if (root1 == NULL && root2 == NULL) // both are NULL
-                return true;
-            return false; // only one of them is NULL
-        }                 // both are non NULL
-
-        // a. data must be equal
-        if (root1->data != root2->data)
-            return false;
-
-        // b. data is the same but number of children vary
-        if (root1->children.size() != root2->children.size())
-            return false;
-
-        // base case for recursion
-        // data and size both are same and Leaf
-        if (root1->children.size() == 0)
-            return true;
-
-        // we can write recursion directly, or can save some
-        // activation records by checking the children
-        // But this would be redundant to the base case. So avoiding it
-
-        bool ret = false; // required coz we want to stop when a mismatch is found, we don't want to and every output, that is unrealistic
-
-        for (int i = 0; i < root1->children.size() && ret == false; i++)
-            ret = isIdentical(root1->children.at(i), root2->children.at(i));
-
-        // if ret is found true it is returned
-        // if nothing is found
-        // then ret remains false, returned.
-        return ret;
+        if (root->left == NULL && root->right == NULL)
+            return NULL;
+        root->left = removeLeafNodes(root->left);
+        root->right = removeLeafNodes(root->right);
+        return root;
     }
 
 </details>
@@ -416,278 +296,332 @@
 
 </details>
 
-<details> <summary><strong> 5. Next larger </strong></summary>
+<details> <summary><strong> 5. Level wise linkedlist </strong></summary>
 
-# 5. Next larger
+# 5. Level wise linkedlist
 
-    Given a generic tree and an integer n. Find and return the node with next larger element in the Tree i.e. find a node with value just greater than n.
-
-    Return NULL if no node is present with the value greater than n.
+    Given a binary tree, write code to create a separate linked list for each level. You need to return the array which contains head of each level linked list.
 
 **Input Format**
 
-    Line 1 : Integer n
-    Line 2 : Elements in level order form separated by space (as per done in class).
-    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
+    Elements in level order form (separated by space). If any node does not have left or right child, take -1 in its place.
 
 **Output Format**
 
-    Node with value just greater than n.
+    Each level linked list is printed in new line (elements separated by space).
 
-**Sample Input 1**
+**Sample Input**
 
-    18
-    10 3 20 30 40 2 40 50 0 0 0 0
+    5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
 
-**Sample Output 1**
+**Sample Output**
 
-    20
-
-**Sample Input 2**
-
-    21
-    10 3 20 30 40 2 40 50 0 0 0 0
-
-**Sample Output 2**
-
-    30
+    5
+    6 10
+    2 3
+    9
 
 <details> <summary><strong>Code</strong></summary>
 
-    // Following is the given Tree node structure
-    /**************
+    vector<node<int> *> createLLForEachLevel(BinaryTreeNode<int> *root)
+    {
+        // if(root==NULL)
+        //     return NULL;
 
-    template <typename T>
-    class TreeNode {
-    public:
-        T data;
-        vector<TreeNode<T>*> children;
+        // followung the same level order
+        // first make the queue fully, then make the LL's
+        // same both ways.
 
-        TreeNode(T data) {
-            this->data = data;
-        }
+        queue<BinaryTreeNode<int> *> q; // the queue required for level order
+        q.push(root);                   //    for level order
+        q.push(NULL);                   //    for level order
 
-        ~TreeNode() {
-            for (int i = 0; i < children.size(); i++) {
-                delete children[i];
+        vector<node<int> *> ret; // heads of the LL's
+        ret.push_back(NULL);     // making a place for an empty LL, emptiness indicated by NULL
+
+        node<int> *ltail = NULL; // keeping track of the current LL's tail. Can serve as NULL and head too. Used fr=or progressing the list
+
+        BinaryTreeNode<int> *temp; // the variable for doing queue ops, so that calls are not made many times
+
+        while (!q.empty())
+        {
+            temp = q.front();
+            q.pop();
+
+            if (temp == NULL) // not going to happen initially, as root!=NULL
+            {
+                ltail->next = NULL; // end the list
+                if (q.empty())      // last NULL
+                    return ret;
+
+                ltail = NULL;
+                ret.push_back(ltail); // make a place for the new list in ret
+                // tail which points to nothing is now the head of the LL
+                q.push(NULL);
+                continue;
+            }
+
+            if (temp->left != NULL)
+                q.push(temp->left);
+
+            if (temp->right != NULL)
+                q.push(temp->right);
+
+            if (ret.back() == NULL) // we have valid node in queue but the LL is not started
+            {
+                ltail = new node<int>(temp->data); // making tail point to something
+                ret.push_back(ltail);
+            }
+            else
+            {
+                ltail->next = new node<int>(temp->data);
+                ltail = ltail->next;
             }
         }
+    }
+
+    /*
+        Insights: Using the same principle of level, by a seperator.
+        Problems encountered:
+        0. Should i fill the entire queue and then make the LL's. No we won't be able to do this in a queue(as you'll never reach a q.front()==NULL). You can use a vector. But the space complexity is o(N), but for queue it is O(N/2). Which is huge.
+        Using recursion yields the same thing. So queue is the most effiecient.
+        If we use queue, we have to make the LL simultaneously. As nodes are being popped.
+        1. How to make an LL. Soln: Using NULL in the return vector before the loop starts.
+        2. For progressing the list, we need to have a tail pointer. Make a variable called ltail before the loop.
+        3. A bug: ltail be made to point to NULL and pushed into the stack. pushing NULL and then setting ltail = NULL is wrong because ltail is nothing but a pointer. Hence ltail itself needs to be pushed when making the head. Basics.
+    */
+
+</details>
+
+---
+
+</details>
+
+<details> <summary><strong> 6. ZigZag tree </strong></summary>
+
+# 6. ZigZag tree
+
+    Given a binary tree, print the zig zag order i.e print level 1 from left to right, level 2 from right to left and so on. This means odd levels should get printed from left to right and even level right to left.
+
+**Input Format**
+
+    Elements in level order form (separated by space)
+
+    (If any node does not have left or right child, take -1 in its place)
+
+**Output Format**
+
+    Elements are printed level wise, each level in new line (separated by space).
+
+**Sample Input**
+
+    5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
+
+**Sample Output**
+
+    5
+    10 6
+    2 3
+    9
+
+<details> <summary><strong>Code</strong></summary>
+
+    // Following is the Binary Tree node structure
+    /**************
+    class BinaryTreeNode {
+        public :
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
     };
+
+    ***************/
+
+    // used Linked list
+    #include <list>
+    void zigZagOrder(BinaryTreeNode<int> *root)
+    {
+        if (root == NULL)
+            return;
+
+        queue<BinaryTreeNode<int> *> q;
+        q.push(root);
+        q.push(NULL);
+        // O(n) space complexity
+
+        list<BinaryTreeNode<int> *> prit;
+
+        BinaryTreeNode<int> *temp;
+
+        bool flag = false;
+
+        while (!q.empty())
+        {
+            temp = q.front();
+            q.pop();
+
+            if (temp == NULL)
+            {
+
+                while (!prit.empty())
+                {
+                    cout << prit.front()->data << " ";
+                    prit.pop_front();
+                }
+                cout << "\n";
+                if (q.empty())
+                    return;
+                q.push(NULL);
+                flag = !flag;
+                continue;
+            }
+            if (flag == false)
+                prit.push_back(temp);
+            else
+                prit.push_front(temp);
+            if (temp->left != NULL)
+                q.push(temp->left);
+            if (temp->right != NULL)
+                q.push(temp->right);
+        }
+    }
+
+    // Using two stacks and L->R and R->L child check
+    void zigZagOrder(BinaryTreeNode<int> *root)
+    {
+        if (root == NULL)
+            return;
+        stack<BinaryTreeNode<int> *> sf;     // forward
+        stack<BinaryTreeNode<int> *> sb;     // backwards
+        stack<BinaryTreeNode<int> *> *p, *c; // parents, children
+
+        stack<BinaryTreeNode<int> *> *switcher;
+        sf.push(root);
+        p = &sf;
+        c = &sb;
+
+        bool flag = false; // this makes us shift the array from left to right and right to left
+        while (!p->empty())
+        {
+            if (flag == false)
+            {
+                while (!p->empty())
+                {
+                    // print the conent of the parent
+                    cout << p->top()->data << " ";
+                    if (p->top()->left != NULL)
+                        c->push(p->top()->left);
+
+                    if (p->top()->right != NULL)
+                        c->push(p->top()->right);
+                    p->pop();
+                }
+                // done with the parent
+                cout << "\n";
+                flag = true;
+            }
+            else
+            {
+                while (!p->empty())
+                {
+                    // print the conent of the parent
+                    cout << p->top()->data << " ";
+                    if (p->top()->right != NULL)
+                        c->push(p->top()->right);
+                    if (p->top()->left != NULL)
+                        c->push(p->top()->left);
+                    p->pop();
+                }
+                // done with the parent
+                cout << "\n";
+                flag = false;
+            }
+
+            // switch parent and child.
+            switcher = p;
+            p = c;
+            c = switcher;
+        }
+    }
+
+</details>
+
+---
+
+</details>
+
+<details> <summary><strong> 7. Min and Max of Binary Tree </strong></summary>
+
+# 7. Min and Max of Binary Tree
+
+    Given a binary tree, find and return the min and max data value of given binary tree.
+    Return the output as an object of PairAns class, which is already created.
+
+**Input Format**
+
+    Elements in level order form (separated by space)
+    (If any node does not have left or right child, take -1 in its place)
+
+**Output Format**
+
+    Max and min (separated by space)
+
+**Sample Input**
+
+    8 3 10 1 6 -1 14 -1 -1 4 7 13 -1 -1 -1 -1 -1 -1 -1
+
+**Sample Output**
+
+    14 1
+
+<details> <summary><strong>Code</strong></summary>
+
+    // Following is the Binary Tree node structure
+    /**************
+    class BinaryTreeNode {
+        public :
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data)
+        {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+    // PairAns class -
+    class PairAns
+    {
+        public :
+            int min;
+            int max;
+    };
+
     ***************/
     #include <climits>
-    #include <queue>
-    TreeNode<int> *nextLargerElement(TreeNode<int> *root, int n)
-    {
-        // edge case
-        if (root == NULL || root->children.size() == 0)
-            return root;
-
-        // scan element and store the max
-        queue<TreeNode<int> *> nodesPending;
-
-        int curr = 0, prev_max = INT_MAX; // for finding max
-        TreeNode<int> *trav = root;       // optimization
-
-        TreeNode<int> *ret; // node address to be returned
-
-        // consider the root, as only children are a part of the queue process.
-        // root is the child of none
-
-        ret = root;
-        if (root->data > n)
-            prev_max = root->data;
-
-        // have to push as to make it systematic for all nodes
-        nodesPending.push(root);
-
-        while (nodesPending.size() != 0)
-        {
-            trav = nodesPending.front();
-            nodesPending.pop();
-            for (int i = 0; i < trav->children.size(); i++)
-            {
-                curr = trav->children.at(i)->data; // child's data
-                if (curr > n && curr < prev_max)
-                {
-                    prev_max = curr;
-                    ret = trav->children.at(i); // store the child
-                }
-                nodesPending.push(trav->children.at(i));
-                // pushing child node as subtree source in th queue
-            }
-        }
-        // prev_max hols the maximum array
-        // ret hold the node's address
-        return ret;
-    }
-
-    // Insights: It is is very important to consider the root too.
-
-</details>
-
----
-
-</details>
-
-<details> <summary><strong> 6. Second Largest Element In Tree </strong></summary>
-
-# 6. Second Largest Element In Tree
-
-    Given a generic tree, find and return the node with second largest value in given tree. Return NULL if no node with required value is present.
-
-**Input Format**
-
-    Line 1 : Elements in level order form separated by space (as per done in class).
-    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
-
-**Output Format**
-
-    Second Largest node data
-
-**Sample Input 1**
-
-    10 3 20 30 40 2 40 50 0 0 0 0
-
-**Sample Output 1**
-
-    40
-
-<details> <summary><strong>Code</strong></summary>
-
-    // Following is the given Tree node structure
-    /**************
-
-        template <typename T>
-        class TreeNode {
-        public:
-            T data;
-            vector<TreeNode<T>*> children;
-
-            TreeNode(T data) {
-                this->data = data;
-            }
-
-            ~TreeNode() {
-                for (int i = 0; i < children.size(); i++) {
-                    delete children[i];
-                }
-            }
-        };
-        ***************/
-    #include <queue>
-    TreeNode<int> *secondLargest(TreeNode<int> *root)
+    PairAns minMax(BinaryTreeNode<int> *root)
     {
         if (root == NULL)
-            return root;
-
-        queue<TreeNode<int> *> nodesPending;
-
-        nodesPending.push(root);
-
-        int curr = root->data, max = root->data, max1 = root->data; //max1 > max1 always except initially
-        // but no redundancy is present for pointers
-
-        TreeNode<int> *trav;        // for the traversal variable
-        TreeNode<int> *ret = NULL;  // for the 2nd highest node pointer
-        TreeNode<int> *ret1 = NULL; // for highest node pointer
-
-        while (nodesPending.size() != 0)
         {
-            trav = nodesPending.front();
-            nodesPending.pop();
-            for (int i = 0; i < trav->children.size(); i++)
-            {
-                curr = trav->children.at(i)->data;
-                if (curr > max1)
-                {
-                    max = max1;
-                    max1 = curr;
-                    ret = ret1;
-                    ret1 = trav->children.at(i);
-                }
-                else if (curr > max)
-                {
-                    max = curr;
-                    ret = trav->children.at(i);
-                }
-                nodesPending.push(trav->children.at(i));
-            }
+            PairAns ret;
+            ret.min = INT_MAX;
+            ret.max = INT_MIN;
+            return ret; // return by value
         }
-        return ret;
-    }
-
-</details>
-
----
-
-</details>
-
-<details> <summary><strong> 7. Replace with depth </strong></summary>
-
-# 7. Replace with depth
-
-    In a given Generic Tree, replace each node with its depth value. You need to just update the data of each node, no need to return or print anything.
-
-**Input Format**
-
-    Line 1 : Elements in level order form separated by space (as per done in class).
-
-    Order is - Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
-
-**Sample Input 1**
-
-    10 3 20 30 40 2 40 50 0 0 0 0
-
-**Sample Output 1**
-
-    0
-    1 1 1
-    2 2
-
-<details> <summary><strong>Code</strong></summary>
-
-    // Following is the given Tree node structure
-    /**************
-    template <typename T>
-    class TreeNode {
-    public:
-        T data;
-        vector<TreeNode<T>*> children;
-
-        TreeNode(T data) {
-            this->data = data;
-        }
-
-        ~TreeNode() {
-            for (int i = 0; i < children.size(); i++) {
-                delete children[i];
-            }
-        }
-    };
-    ***************/
-
-    void helper(TreeNode<int>* root, int d);
-    void replaceWithDepthValue(TreeNode<int> *root)
-    {
-        // edge case
-        if(root==NULL)
-            return;
-        root->data = 0;
-        helper(root, 0);
-    }
-
-    void helper(TreeNode<int>* root, int d)
-    {
-        // do work only for the children
-        if(root->children.size()==0)    //leaves have already been taken care of, as they were children
-            return;
-
-        for(int i=0; i<root->children.size(); i++)
-        {
-            root->children.at(i)->data = d+1;
-            helper(root->children.at(i), d+1);
-        }
-        // okay
+        PairAns al = minMax(root->left);
+        PairAns ar = minMax(root->right);
+        al.min = min(al.min, min(ar.min, root->data));
+        al.max = max(al.max, max(ar.max, root->data));
+        return al;
     }
 
 </details>

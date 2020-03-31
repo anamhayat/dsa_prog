@@ -5,10 +5,7 @@ Creation-Date: 2020-01-14T01:18:40+05:30
 ====== Topic 3 - Linked List 1 ======
 Created Tuesday 14 January 2020
 
-[[./Codes/LL_main.cpp]]
-
+[[./Codes|Codes]]
 [[./Quizzes&Exercises/Exercises.md|Exercises]]
-
 [[./Quizzes&Exercises/CodingExercises.md|Coding Exercises]]
-
-[[./zAssignments/Assignments.md|After Assignments]]
+[[./zAssignments/Assignments.md|Assignments.md]]

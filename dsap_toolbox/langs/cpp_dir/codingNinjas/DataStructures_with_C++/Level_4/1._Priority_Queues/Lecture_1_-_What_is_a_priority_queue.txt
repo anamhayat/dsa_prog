@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-12T16:14:40+05:30
+
+====== Lecture 1 - What is a priority queue ======
+Created Wednesday 12 February 2020
+
+We have people in a queue?
+How they** exit **is. And to keep the queue in order, we need to **insert **it nicely too.
+What's the criteria:
+1. Time(known as FCFS) i.e a normal FIFO queue.
+2. VIP factor - By an authority
+3. Criticality - Natural, e.g old age, medical condition.
+Types of queues:
+1. Min -  Lesser value is important.
+2. Max - bigger value is important.
+
+Priority queue ADT:
+1. insert()
+2. getMax() or getMin() - similar to top() in stack
+3. removeMax or removeMIn - similar to pop() in stack.
+
+Which data structure to use:
+{{./Selection_041.png}}
+
+Balanced BST is the way to go. nlogn after all insertions and deletions.

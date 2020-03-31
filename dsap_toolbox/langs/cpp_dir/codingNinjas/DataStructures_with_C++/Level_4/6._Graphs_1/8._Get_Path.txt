@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-31T05:58:01+05:30
+
+====== 8. Get Path ======
+Created Tuesday 31 March 2020
+
+Given A and B nodes.
+Return the path from A to B, if it exists.
+* Path may not necessarily be the shortest.
+
+Two paths are possible:
+1. DFS Path
+2. BFS Path

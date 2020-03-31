@@ -19,7 +19,7 @@ For stacks header is: <stack> which is a template type.
 	0. stack is the name of the class Stack.
 	1. push() is the same , i.e void push(T element);
 	2. pop() is **different**, it is a void.
-	3. top() is the same.
+	3. top() is the same. returns the element on the top.
 	4. empty() is the **changed** name in STL, same as our implementation.
 	5. size() is the same.
 Note: There's no need for any other thing execpt that told here.

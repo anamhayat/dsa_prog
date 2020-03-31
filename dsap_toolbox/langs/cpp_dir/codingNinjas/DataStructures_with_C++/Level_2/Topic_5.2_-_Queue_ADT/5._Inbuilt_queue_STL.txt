@@ -21,3 +21,5 @@ Interface:
 
 Note: Both stack and queue have the exact same interfaces. With the same signatures. Only the working changes. **pop and front are different!**
 * Print was not discussed here.
+
+For both sides insertion and deletion, use <deque>.

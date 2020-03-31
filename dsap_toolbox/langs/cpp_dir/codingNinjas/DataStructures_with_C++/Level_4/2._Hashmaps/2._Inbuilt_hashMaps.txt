@@ -1,0 +1,23 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-18T14:19:28+05:30
+
+====== 2. Inbuilt hashMaps ======
+Created Tuesday 18 February 2020
+
+1. map - ordered- BST implementation - O(logn) - ops.
+2. unordered_map - Hash table. Unordered - O(1) - all ops.
+
+map has an order because you can use inOrder.
+unordered is can be in **any** order. Order is random.
+
+* header: #include<unordered_map>
+* it is a template.
+* remember "key then value"
+
+Th functions: mapname.f()
+1. insert(pair<>) or map[key] = value;
+2. at(key) or mapname[key] - has a side-effect, it adds if the key is not present. at() throws an error if key is absent. Both ways unintentional things happen.
+3. count(key) - returns the count. In a map, it is either 0 or 1. **No side-effect**. **Used for checking.**
+4. size() - returns number of key value pairs.
+5. erase(key), deletes a key if present. Else does nothing. No exceptions.

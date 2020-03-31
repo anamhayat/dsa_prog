@@ -5,7 +5,9 @@ using namespace std;
 int main()
 {
     BinaryTreeNode<int> *root = levelWiseInput<int>();
+    cout << "\n-------------------------------------------------------------\n";
     rawLRPrint(root);
+    // level_n_print(root, 2);
     /*
     ip
     1 2 3 4 -1 5 6 -1 -1 -1 7 -1 -1 -1 -1
@@ -22,6 +24,7 @@ int main()
     level
     1 2 3 4 5 6 7
     */
+    cout << "-------------------------------------------------------------\n";
     delete root;
     cout << endl;
     return 0;
